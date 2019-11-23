@@ -1,0 +1,17 @@
+Analysis & Synthesis Status : Successful - Sat Nov 23 15:13:12 2019
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+Revision Name : TFT_picture
+Top-level Entity Name : TFT_display_top
+Family : Cyclone V
+Logic utilization (in ALMs) : N/A
+Total registers : 27
+Total pins : 24
+Total virtual pins : 0
+Total block memory bits : 2,097,152
+Total DSP Blocks : 1
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 1
+Total DLLs : 0

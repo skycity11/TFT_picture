@@ -1,0 +1,56 @@
+module TFT_picture(
+	input						clk_50m,
+	input						rst_n,
+	
+	input		[10:0]		x_pos,
+	input		[10:0]		y_pos,
+	
+	output	[15:0]	display_data
+);
+
+localparam	H_DISP = 10'd800,
+				V_DISP = 10'd480,
+				POS_X  = 10'd350,
+				POS_Y	 = 10'd190,
+				WIDTH	 = 10'd100,
+				HEIGHT = 10'd100,
+				TOTAL  = 14'd10000,
+				BLACK  = 16'h0000;
+				
+//display_data
+wire		[15:0]	rom_data;
+assign	display_data = rom_valid ? rom_data : BLACK;
+
+//rom_addr
+reg	[13:0]	rom_addr;
+wire				rom_rd_en;
+always @(posedge clk_50m or negedge rst_n) begin
+	if(!rst_n)
+		rom_addr <= 14'd0;
+	else if(rom_rd_en) begin
+		if(rom_addr < TOTAL - 1'b1)
+			rom_addr <= rom_addr + 1'b1;
+		else
+			rome_addr <= 1'b0;
+	end
+	else
+		rom_addr <= rom_addr;
+end
+
+//rom_valid
+reg				rom_valid;
+always @(posedge clk_50m or negedge rst_n) begin
+	if(!rst_n)
+		rom_valid <= 1'b0;
+	else
+		rom_valid <= rom_rd_en;
+end
+
+pic_rom	pic_rom_inst(
+	.address(rom_addr),
+	.clock(clk_50m),
+	.rden(rom_rd_en),
+	.q(rom_data)
+);
+
+endmodule
